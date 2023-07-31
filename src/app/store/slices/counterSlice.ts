@@ -1,29 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-export interface CounterSlice {
-  value: number;
+export interface AuthSlice {
+  token: string | null;
 }
 
-const initialState: CounterSlice = {
-  value: 0,
+const initialState: AuthSlice = {
+  token: null,
 };
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    saveToken: (state, action: PayloadAction<string | null>) => {
+      state.token = action.payload;
     },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    clearToken: (state) => {
+      state.token = null;
     },
   },
 });
 
-export const { increment, incrementByAmount, decrement } = counterSlice.actions;
-export default counterSlice.reducer;
+export const { saveToken, clearToken } = authSlice.actions;
+export default authSlice.reducer;

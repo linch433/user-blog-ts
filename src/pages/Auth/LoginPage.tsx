@@ -9,8 +9,13 @@ import {
   LoginValidator,
 } from '@/app/features/loginScheme.ts';
 import Input from '@/components/ui/Input.tsx';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { saveToken } from '@/app/store/slices/counterSlice.ts';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loginMutation] = useLoginMutation();
 
   const {
@@ -23,8 +28,10 @@ const LoginPage = () => {
     loginMutation(data)
       .unwrap()
       .then((response) => {
-        console.log(response.token);
+        localStorage.setItem('AUTH_TOKEN', response.token);
+        dispatch(saveToken(localStorage.getItem('AUTH_TOKEN')));
         toast.success('Welcome to User-Blog TS');
+        navigate('/');
       })
       .catch((error) => toast.error(error.data.error));
   };
