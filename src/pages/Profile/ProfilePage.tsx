@@ -1,4 +1,5 @@
 import { useUserInfoQuery } from '@/app/store/features/api.ts';
+import { additionalUrl } from '@/app/baseUrl.ts';
 
 const ProfilePage = () => {
   const { data: userInfo, isLoading, isError } = useUserInfoQuery();
@@ -17,10 +18,7 @@ const ProfilePage = () => {
       <p>{userInfo?.extra_details}</p>
       <p>{userInfo?.profession}</p>
       {userInfo?.avatar && (
-        <img
-          src={`http://test-blog-api.ficuslife.com${userInfo?.avatar}`}
-          alt="Profile img"
-        />
+        <img src={`${additionalUrl}${userInfo?.avatar}`} alt="Profile img" />
       )}
     </div>
   );
