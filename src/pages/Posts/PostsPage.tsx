@@ -3,6 +3,8 @@ import { useGetPostsQuery } from '@/app/store/features/posts.api.ts';
 import { PostQuery_T } from '@/types/models.ts';
 import PostCard from '@/components/ui/PostCard.tsx';
 import { clsx } from 'clsx';
+import { motion } from 'framer-motion';
+import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
 
 const PostsPage = () => {
   const [countItem, setCountItem] = useState(20);
@@ -15,14 +17,19 @@ const PostsPage = () => {
     setCountItem((prev) => prev + 20);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <PageLoader />;
   if (isError) return <div>Something went wrong</div>;
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-col gap-4"
+      >
         {posts?.map((post) => <PostCard key={post._id} post={post} />)}
-      </div>
+      </motion.div>
       <div className="flex items-center justify-center my-4">
         <button
           onClick={handleCountItemUpdate}

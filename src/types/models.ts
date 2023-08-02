@@ -36,3 +36,7 @@ export type PostQuery_T = {
   limit?: number;
   skip?: number;
 };
+
+export type PostInfoLocationState_T = {
+  username: string;
+};

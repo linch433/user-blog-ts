@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useGetUsersQuery } from '@/app/store/features/users.api.ts';
 import { UserQuery_T } from '@/types/models.ts';
 import { clsx } from 'clsx';
+import { motion } from 'framer-motion';
 import UserCard from '@/components/ui/UserCard.tsx';
+import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
 
 const UsersPage = () => {
   const [countItems, setCountItems] = useState(20);
@@ -12,7 +14,7 @@ const UsersPage = () => {
 
   const { data: users, isLoading, isError } = useGetUsersQuery(params);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <PageLoader />;
   if (isError) return <div>Something went wrong</div>;
 
   const handleCountUpdate = () => {
@@ -21,7 +23,10 @@ const UsersPage = () => {
 
   return (
     <>
-      <div
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
         className={clsx(
           'mt-4',
           'grid grid-cols-1',
@@ -30,7 +35,7 @@ const UsersPage = () => {
         )}
       >
         {users?.map((user) => <UserCard key={user._id} user={user} />)}
-      </div>
+      </motion.div>
       <div className="flex items-center justify-center my-4">
         <button
           onClick={handleCountUpdate}
