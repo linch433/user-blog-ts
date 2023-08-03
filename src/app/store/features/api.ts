@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@/app/store/store.ts';
-import { User_T } from '@/types/models.ts';
+import { AuthTokenResponse_T, LoginUser_T, User_T } from '@/types/models.ts';
 
 export const api = createApi({
   reducerPath: 'api',
@@ -17,7 +17,7 @@ export const api = createApi({
     },
   }),
   endpoints: (builder) => ({
-    login: builder.mutation({
+    login: builder.mutation<AuthTokenResponse_T, LoginUser_T>({
       query: (arg) => ({
         url: '/auth',
         method: 'POST',

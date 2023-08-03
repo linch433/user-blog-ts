@@ -2,6 +2,11 @@ export type AuthTokenResponse_T = {
   token: string;
 };
 
+export type LoginUser_T = {
+  email: string;
+  password: string;
+};
+
 export type User_T = {
   _id: string;
   email?: string | null;
@@ -49,4 +54,15 @@ export type NewUser_T = {
   skills: string;
   profession: string;
   details: string;
+};
+
+export type Comments_T = {
+  _id: string;
+  commentedBy: string;
+  followedCommentID?: string | null;
+  postID: string;
+  text: string;
+  dateCreated: string;
+  likes: string[];
+  followedCommentList?: Comments_T[];
 };
