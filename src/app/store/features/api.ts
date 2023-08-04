@@ -24,7 +24,7 @@ export const api = createApi({
         body: arg,
       }),
     }),
-    userInfo: builder.query<User_T, Partial<User_T>>({
+    userInfo: builder.query<User_T, void>({
       query: () => ({
         url: '/auth/user',
         method: 'GET',
