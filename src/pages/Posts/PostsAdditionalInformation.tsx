@@ -6,6 +6,7 @@ import { useGetCommentsQuery } from '@/app/store/features/comments.api.ts';
 import { handleFollowedComment } from '@/utils/services/HandleFollowedComment.ts';
 import PostInfoCard from '@/components/ui/PostsAdditionalInformation/PostInfoCard.tsx';
 import CommentsSection from '@/components/ui/PostsAdditionalInformation/CommentsSection.tsx';
+import CommentInput from '@/components/ui/Comment/CommentInput.tsx';
 
 const PostsAdditionalInformation = () => {
   const params = useParams();
@@ -32,7 +33,8 @@ const PostsAdditionalInformation = () => {
   return (
     <div>
       <PostInfoCard postDetails={postDetails} username={username} />
-      <div className="mt-4">
+      <div className="my-4">
+        <CommentInput postId={postDetails?._id} />
         <CommentsSection
           isLoadingComments={isLoadingComments}
           commentsArray={commentsArray}

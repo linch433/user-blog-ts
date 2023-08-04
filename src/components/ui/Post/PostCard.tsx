@@ -34,7 +34,7 @@ const PostCard = ({ post }: IPostCard) => {
   };
 
   const handleNavigationToAdditionalInfo = () => {
-    navigate(`${_id}`, {
+    navigate(`/posts/${_id}`, {
       state: { username: user?.name ? user?.name : 'Unknown user' },
     });
   };

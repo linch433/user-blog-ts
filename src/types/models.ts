@@ -66,3 +66,8 @@ export type Comments_T = {
   likes: string[];
   followedCommentList?: Comments_T[];
 };
+
+export type NewComment_T = {
+  text: string;
+  followedCommentID?: string;
+};

@@ -1,5 +1,6 @@
 import { api } from '@/app/store/features/api.ts';
 import { Comments_T } from '@/types/models.ts';
+import { NewCommentArgs_T } from '@/types/queries.ts';
 
 const commentsApiWithTags = api.enhanceEndpoints({ addTagTypes: ['Comments'] });
 
@@ -18,7 +19,22 @@ export const commentsApi = commentsApiWithTags.injectEndpoints({
       }),
       invalidatesTags: ['Comments'],
     }),
+    createNewComment: builder.mutation<
+      Omit<Comments_T, 'followedCommentList'>,
+      NewCommentArgs_T
+    >({
+      query: ({ args, body }) => ({
+        url: `/comments/post/${args}`,
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: ['Comments'],
+    }),
   }),
 });
 
-export const { useGetCommentsQuery, useSetLikeOnCommentMutation } = commentsApi;
+export const {
+  useGetCommentsQuery,
+  useSetLikeOnCommentMutation,
+  useCreateNewCommentMutation,
+} = commentsApi;
