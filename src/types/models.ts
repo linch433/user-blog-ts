@@ -18,3 +18,21 @@ export type UserQuery_T = {
   limit?: number;
   skip?: number;
 };
+
+export type Post_T = {
+  _id: string;
+  title?: string;
+  fullText?: string;
+  description?: string;
+  dateCreated?: string;
+  image?: string;
+  likes?: string[];
+  postedBy: string;
+};
+
+export type PostQuery_T = {
+  search?: string;
+  postedBy?: string;
+  limit?: number;
+  skip?: number;
+};
