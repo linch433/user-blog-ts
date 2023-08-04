@@ -4,15 +4,17 @@ export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://test-blog-api.ficuslife.com/api/v1',
+    // prepareHeaders: headers => {}
   }),
   endpoints: (builder) => ({
-    getUsers: builder.query({
-      query: (args) => ({
-        url: `/users`,
-        params: { ...args },
+    login: builder.mutation({
+      query: (arg) => ({
+        url: '/auth',
+        method: 'POST',
+        body: arg,
       }),
     }),
   }),
 });
 
-export const { useGetUsersQuery } = api;
+export const { useLoginMutation } = api;
