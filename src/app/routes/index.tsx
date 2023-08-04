@@ -5,6 +5,7 @@ import HomePage from '@/pages/Home/HomePage.tsx';
 import AuthPage from '@/pages/Auth/AuthPage.tsx';
 import UsersPage from '@/pages/Users/UsersPage.tsx';
 import PostsPage from '@/pages/Posts/PostsPage.tsx';
+import ProfilePage from '@/pages/Profile/ProfilePage.tsx';
 
 const routes = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const routes = createBrowserRouter([
       {
         path: 'posts',
         element: <PostsPage />,
+      },
+      {
+        path: 'profile',
+        element: <ProfilePage />,
       },
     ],
   },
