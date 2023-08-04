@@ -6,9 +6,9 @@ import { useUserInfoQuery } from '@/app/store/features/api.ts';
 import { useSetLikeForPostByIdMutation } from '@/app/store/features/posts.api.ts';
 import { RootState } from '@/app/store/store.ts';
 import { getFormatDate } from '@/utils/services/DateFormat.ts';
-import { findLikeOnPost } from '@/utils/services/FindLike.ts';
+import { findLikeOnPostOrComment } from '@/utils/services/FindLike.ts';
 import { Post_T } from '@/types/models.ts';
-import PostText from '@/components/ui/PostText.tsx';
+import PostText from '@/components/ui/Post/PostText.tsx';
 import LikeSection from '@/components/ui/LikeSection.tsx';
 import toast from 'react-hot-toast';
 import { clsx } from 'clsx';
@@ -25,7 +25,7 @@ const PostCard = ({ post }: IPostCard) => {
   const { data: userInfo } = useUserInfoQuery();
   const [setLikeOnPost] = useSetLikeForPostByIdMutation();
 
-  const isLikedPost = findLikeOnPost(likes as string[], userInfo);
+  const isLikedPost = findLikeOnPostOrComment(likes as string[], userInfo);
 
   const handleSetLikeForPost = () => {
     setLikeOnPost(_id)

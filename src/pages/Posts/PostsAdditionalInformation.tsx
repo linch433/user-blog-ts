@@ -1,13 +1,11 @@
-import PostText from '@/components/ui/PostText.tsx';
 import { useLocation, useParams } from 'react-router-dom';
 import { useGetPostByIdQuery } from '@/app/store/features/posts.api.ts';
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
-import { getFormatDate } from '@/utils/services/DateFormat.ts';
-import { additionalUrl } from '@/app/baseUrl.ts';
 import { Comments_T, PostInfoLocationState_T } from '@/types/models.ts';
 import { useGetCommentsQuery } from '@/app/store/features/comments.api.ts';
-import Comment from '@/components/ui/Comment.tsx';
 import { handleFollowedComment } from '@/utils/services/HandleFollowedComment.ts';
+import PostInfoCard from '@/components/ui/PostsAdditionalInformation/PostInfoCard.tsx';
+import CommentsSection from '@/components/ui/PostsAdditionalInformation/CommentsSection.tsx';
 
 const PostsAdditionalInformation = () => {
   const params = useParams();
@@ -24,7 +22,7 @@ const PostsAdditionalInformation = () => {
     params.id as string,
   );
 
-  if (isLoadingPostDetails && isLoadingComments) return <PageLoader />;
+  if (isLoadingPostDetails) return <PageLoader />;
   if (isError) return <div>Something went wrong</div>;
 
   if (comments) {
@@ -33,34 +31,12 @@ const PostsAdditionalInformation = () => {
 
   return (
     <div>
-      <>
-        <PostText title="Title" text={postDetails?.title} />
-        <PostText title="Full text" text={postDetails?.fullText} />
-        <PostText title="Description" text={postDetails?.description} />
-        <PostText
-          title="Date created"
-          text={getFormatDate(postDetails?.dateCreated as string)}
-        />
-        <PostText title="Posted by" text={username} />
-        <PostText title="Likes" text={postDetails?.likes?.length} />
-        {postDetails?.image && (
-          <div className="flex justify-center mt-2">
-            <img
-              alt={`Image for ${postDetails?.title} post`}
-              src={`${additionalUrl + postDetails?.image}`}
-              loading="lazy"
-              className="bg-contain w-96 rounded"
-            />
-          </div>
-        )}
-      </>
+      <PostInfoCard postDetails={postDetails} username={username} />
       <div className="mt-4">
-        <div className="mb-4">Comments section:</div>
-        <div className="flex gap-4 flex-col">
-          {commentsArray?.map((comment) => (
-            <Comment key={comment._id} comment={comment} />
-          ))}
-        </div>
+        <CommentsSection
+          isLoadingComments={isLoadingComments}
+          commentsArray={commentsArray}
+        />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { useUserInfoQuery } from '@/app/store/features/api.ts';
 import { additionalUrl } from '@/app/baseUrl.ts';
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
 import { motion } from 'framer-motion';
-import PostText from '@/components/ui/PostText.tsx';
+import PostText from '@/components/ui/Post/PostText.tsx';
 import { getFormatDate } from '@/utils/services/DateFormat.ts';
 
 const ProfilePage = () => {

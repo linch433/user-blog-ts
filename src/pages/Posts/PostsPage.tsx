@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useGetPostsQuery } from '@/app/store/features/posts.api.ts';
 import { PostQuery_T } from '@/types/models.ts';
-import PostCard from '@/components/ui/PostCard.tsx';
+import PostCard from '@/components/ui/Post/PostCard.tsx';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
@@ -26,7 +26,7 @@ const PostsPage = () => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col gap-4"
+        className="grid grid-cols-1 gap-4 md:space-y-0"
       >
         {posts?.map((post) => <PostCard key={post._id} post={post} />)}
       </motion.div>
