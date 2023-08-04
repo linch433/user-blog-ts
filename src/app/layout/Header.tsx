@@ -5,6 +5,8 @@ import { RootState } from '@/app/store/store.ts';
 import { clearToken, saveToken } from '@/app/store/slices/counterSlice.ts';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LogOutButton from '@/components/ui/LogOutButton.tsx';
+import toast from 'react-hot-toast';
 
 const Header = () => {
   const token = useSelector((state: RootState) => state.auth.token);
@@ -23,6 +25,9 @@ const Header = () => {
     localStorage.removeItem('AUTH_TOKEN');
     dispatch(clearToken());
     navigate('/');
+    toast("You're successfully log out!", {
+      icon: '👋🏽',
+    });
   };
 
   return (
@@ -38,7 +43,7 @@ const Header = () => {
       <NavigationLink path="posts" navigationName="Posts" />
       {token && <NavigationLink path="profile" navigationName="Profile" />}
       {token ? (
-        <button onClick={handleLogOut}>LogOut</button>
+        <LogOutButton handleLogOut={handleLogOut} />
       ) : (
         <NavigationLink path="auth" navigationName="Auth" />
       )}

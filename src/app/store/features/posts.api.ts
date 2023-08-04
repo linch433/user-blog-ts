@@ -13,8 +13,26 @@ export const postsApi = postsApiWithTag.injectEndpoints({
       transformResponse: (rawResult: { data: Post_T[] }) => {
         return rawResult.data;
       },
+      providesTags: ['Posts'],
+    }),
+    getPostById: builder.query<Post_T, string>({
+      query: (args) => ({
+        url: `/posts/${args}`,
+      }),
+      providesTags: ['Posts'],
+    }),
+    setLikeForPostById: builder.mutation({
+      query: (postId) => ({
+        url: `/posts/like/${postId}`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['Posts'],
     }),
   }),
 });
 
-export const { useGetPostsQuery } = postsApi;
+export const {
+  useGetPostsQuery,
+  useSetLikeForPostByIdMutation,
+  useGetPostByIdQuery,
+} = postsApi;

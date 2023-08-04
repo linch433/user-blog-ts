@@ -6,6 +6,7 @@ import AuthPage from '@/pages/Auth/AuthPage.tsx';
 import UsersPage from '@/pages/Users/UsersPage.tsx';
 import PostsPage from '@/pages/Posts/PostsPage.tsx';
 import ProfilePage from '@/pages/Profile/ProfilePage.tsx';
+import PostsAdditionalInformation from '@/pages/Posts/PostsAdditionalInformation.tsx';
 
 const routes = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const routes = createBrowserRouter([
       {
         path: 'profile',
         element: <ProfilePage />,
+      },
+      {
+        path: 'posts/:id',
+        element: <PostsAdditionalInformation />,
       },
     ],
   },

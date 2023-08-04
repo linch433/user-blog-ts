@@ -1,6 +1,6 @@
 interface IPostText {
   title: string;
-  text: string | undefined;
+  text: string | number | undefined;
 }
 
 const PostText = ({ title, text }: IPostText) => {
