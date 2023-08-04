@@ -12,7 +12,6 @@ import PostText from '@/components/ui/PostText.tsx';
 import LikeSection from '@/components/ui/LikeSection.tsx';
 import toast from 'react-hot-toast';
 import { clsx } from 'clsx';
-import { motion } from 'framer-motion';
 
 interface IPostCard {
   post: Post_T;
@@ -26,7 +25,7 @@ const PostCard = ({ post }: IPostCard) => {
   const { data: userInfo } = useUserInfoQuery();
   const [setLikeOnPost] = useSetLikeForPostByIdMutation();
 
-  const isLikedPost = findLikeOnPost(likes as string[], userInfo?._id);
+  const isLikedPost = findLikeOnPost(likes as string[], userInfo);
 
   const handleSetLikeForPost = () => {
     setLikeOnPost(_id)
@@ -41,16 +40,9 @@ const PostCard = ({ post }: IPostCard) => {
   };
 
   return (
-    <motion.div
+    <div
       key={_id}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.9 }}
-      transition={{ duration: 0.3 }}
-      className={clsx(
-        'bg-secondary-dark-blue',
-        'rounded p-4 cursor-pointer',
-        'hover:my-2',
-      )}
+      className={clsx('bg-secondary-dark-blue', 'rounded p-4 cursor-pointer')}
       onClick={handleNavigationToAdditionalInfo}
     >
       <PostText title="Title" text={title} />
@@ -79,7 +71,7 @@ const PostCard = ({ post }: IPostCard) => {
         likes={likes}
         setLike={handleSetLikeForPost}
       />
-    </motion.div>
+    </div>
   );
 };
 

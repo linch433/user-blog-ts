@@ -1,24 +1,39 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
+  defaultRegisterValues,
   RegisterCredentials,
   RegisterValidator,
 } from '@/app/features/registerScheme.ts';
 import Input from '@/components/ui/Input.tsx';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
+import { useCreateUserMutation } from '@/app/store/features/users.api.ts';
+import toast from 'react-hot-toast';
 
 const RegisterPage = () => {
+  const [createNewUser] = useCreateUserMutation();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitSuccessful },
   } = useForm<RegisterCredentials>({
     resolver: zodResolver(RegisterValidator),
   });
+  const onSubmit: SubmitHandler<RegisterCredentials> = (data) => {
+    createNewUser(data)
+      .unwrap()
+      .then(() => {
+        toast.success("You're successfully registered! Try to LogIn");
 
-  const onSubmit: SubmitHandler<RegisterCredentials> = (data) =>
-    console.log(data);
+        // TODO: Make to reset form after submit properly
+        if (isSubmitSuccessful) {
+          reset(defaultRegisterValues);
+        }
+      })
+      .catch((error) => toast.error(error.data.error));
+  };
 
   return (
     <form

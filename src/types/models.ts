@@ -40,3 +40,13 @@ export type PostQuery_T = {
 export type PostInfoLocationState_T = {
   username: string;
 };
+
+export type NewUser_T = {
+  email: string;
+  password: string;
+  name: string;
+  extra_details: string;
+  skills: string;
+  profession: string;
+  details: string;
+};

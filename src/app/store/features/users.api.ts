@@ -1,5 +1,5 @@
 import { api } from '@/app/store/features/api.ts';
-import { User_T, UserQuery_T } from '@/types/models.ts';
+import { NewUser_T, User_T, UserQuery_T } from '@/types/models.ts';
 
 const usersApiWithTag = api.enhanceEndpoints({ addTagTypes: ['Users'] });
 
@@ -14,6 +14,13 @@ export const usersApi = usersApiWithTag.injectEndpoints({
         return rawResult.data;
       },
     }),
+    createUser: builder.mutation<User_T, Partial<NewUser_T>>({
+      query: (args) => ({
+        url: '/users',
+        method: 'POST',
+        body: args,
+      }),
+    }),
     getUserById: builder.query<User_T, string>({
       query: (args) => ({
         url: `/users/${args}`,
@@ -22,4 +29,5 @@ export const usersApi = usersApiWithTag.injectEndpoints({
   }),
 });
 
-export const { useGetUsersQuery, useGetUserByIdQuery } = usersApi;
+export const { useGetUsersQuery, useGetUserByIdQuery, useCreateUserMutation } =
+  usersApi;
