@@ -17,7 +17,7 @@ const ModalWindow = ({
   height = 'h-3/4',
   children,
   mobileWidth = 'w-[95%]',
-  width = 'w-3/4',
+  width = 'md:w-3/4',
 }: IModalWindow) => {
   const container = useRef(null);
   useOutsideAlerter({ ref: container, callback: () => closeModal() });
