@@ -5,6 +5,7 @@ import { findLikeOnPostOrComment } from '@/utils/services/FindLike.ts';
 import { useSetLikeOnCommentMutation } from '@/app/store/features/comments.api.ts';
 import { useGetUserByIdQuery } from '@/app/store/features/users.api.ts';
 import toast from 'react-hot-toast';
+import Comment from '@/components/ui/Comment/Comment.tsx';
 
 interface IFollowedComment {
   followedComment: Comments_T;
@@ -31,16 +32,8 @@ const FollowedComment = ({
   };
 
   return (
-    <div key={followedComment._id} className="bg-main-light-blue rounded p-2">
-      <p className="truncate">{followedComment.text}</p>
-      <p className="truncate">{username?.name}</p>
-      <p>{getFormatDate(followedComment.dateCreated)}</p>
-      <LikeSection
-        isLikedPost={isLikedFollowedComment}
-        token={token}
-        likes={followedComment.likes}
-        setLike={handleSetLikeOnComment}
-      />
+    <div key={followedComment._id}>
+      <Comment comment={followedComment} />
     </div>
   );
 };

@@ -10,12 +10,22 @@ import { useSetLikeOnCommentMutation } from '@/app/store/features/comments.api.t
 import toast from 'react-hot-toast';
 import FollowedComment from '@/components/ui/Comment/FollowedComment.tsx';
 import { clsx } from 'clsx';
+import { BsFillReplyFill } from 'react-icons/bs';
+import { BiSolidEdit } from 'react-icons/bi';
+import HoverContainer from '@/components/ui/HoverContainer.tsx';
+import { useState } from 'react';
+import EditCommentModal from '@/components/ui/Comment/EditCommentModal.tsx';
+import AddFollowedCommentModal from '@/components/ui/Comment/AddFollowedCommentModal.tsx';
 
 interface IComment {
   comment: Comments_T;
 }
 
 const Comment = ({ comment }: IComment) => {
+  const [isModalToEditActive, setIsModalToEditActive] = useState(false);
+  const [isModalToAddFollowedActive, setIsModalToAddFollowedActive] =
+    useState(false);
+
   const token = useSelector((state: RootState) => state.auth.token);
   const { data: userInfo } = useUserInfoQuery();
 
@@ -36,16 +46,43 @@ const Comment = ({ comment }: IComment) => {
   return (
     <div>
       <div key={comment._id} className="bg-secondary-dark-blue rounded p-2">
-        <p className="truncate">{comment.text}</p>
-        <p className="truncate">{username ? username?.name : 'Unknown user'}</p>
-        <p>{comment.followedCommentID}</p>
-        <p>{getFormatDate(comment.dateCreated as string)}</p>
-        <LikeSection
-          isLikedPost={isLikedComment}
-          token={token}
-          likes={comment.likes}
-          setLike={handleSetLikeOnComment}
+        <EditCommentModal
+          isModalActive={isModalToEditActive}
+          setIsModalActive={setIsModalToEditActive}
+          comment={comment}
         />
+        <AddFollowedCommentModal
+          isModalActive={isModalToAddFollowedActive}
+          setIsModalActive={setIsModalToAddFollowedActive}
+          comment={comment}
+        />
+        <div className="flex justify-between">
+          <p className="truncate">{comment.text}</p>
+          {userInfo?._id === comment.commentedBy && (
+            <HoverContainer>
+              <BiSolidEdit
+                size={30}
+                onClick={() => setIsModalToEditActive(true)}
+              />
+            </HoverContainer>
+          )}
+        </div>
+        <p className="truncate">{username ? username?.name : 'Unknown user'}</p>
+        <p>{getFormatDate(comment.dateCreated as string)}</p>
+        <div className="flex justify-between mt-4">
+          <LikeSection
+            isLikedPost={isLikedComment}
+            token={token}
+            likes={comment.likes}
+            setLike={handleSetLikeOnComment}
+          />
+          <HoverContainer>
+            <BsFillReplyFill
+              size={30}
+              onClick={() => setIsModalToAddFollowedActive(true)}
+            />
+          </HoverContainer>
+        </div>
       </div>
       <div
         className={clsx(
@@ -57,8 +94,6 @@ const Comment = ({ comment }: IComment) => {
           <FollowedComment
             key={followedComment._id}
             followedComment={followedComment}
-            token={token}
-            userInfo={userInfo}
           />
         ))}
       </div>

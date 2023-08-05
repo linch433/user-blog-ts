@@ -12,7 +12,7 @@ interface ILikeSection {
 const LikeSection = ({ isLikedPost, token, likes, setLike }: ILikeSection) => {
   return (
     <p
-      className={clsx('flex flex-row gap-1', 'items-center', 'text-2xl mt-4')}
+      className={clsx('flex flex-row gap-1', 'items-center', 'text-2xl')}
       onClick={(event) => event.stopPropagation()}
     >
       <motion.span

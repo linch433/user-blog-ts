@@ -30,6 +30,17 @@ export const commentsApi = commentsApiWithTags.injectEndpoints({
       }),
       invalidatesTags: ['Comments'],
     }),
+    updateUserComment: builder.mutation<
+      Omit<Comments_T, 'followedCommentList'>,
+      NewCommentArgs_T
+    >({
+      query: ({ args, body }) => ({
+        url: `/comments/${args}`,
+        method: 'PATCH',
+        body: body,
+      }),
+      invalidatesTags: ['Comments'],
+    }),
   }),
 });
 
@@ -37,4 +48,5 @@ export const {
   useGetCommentsQuery,
   useSetLikeOnCommentMutation,
   useCreateNewCommentMutation,
+  useUpdateUserCommentMutation,
 } = commentsApi;
