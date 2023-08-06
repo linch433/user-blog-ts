@@ -3,12 +3,50 @@ import { additionalUrl } from '@/app/baseUrl.ts';
 import PostText from '@/components/ui/Post/PostText.tsx';
 import { getFormatDate } from '@/utils/services/DateFormat.ts';
 import { motion } from 'framer-motion';
+import PropertyIcons from '@/components/ui/PostsAdditionalInformation/PropertyIcons.tsx';
+import { ChangeEvent, useState } from 'react';
+import toast from 'react-hot-toast';
+import ImageUpload from '@/components/ui/ImageUpload.tsx';
+import { useUpdateUserImageByIdMutation } from '@/app/store/features/users.api.ts';
+import EditProfileModal from '@/components/ui/Profile/EditProfileModal.tsx';
 
 interface IProfileCard {
   userInfo: User_T | undefined;
 }
 
 const ProfileCard = ({ userInfo }: IProfileCard) => {
+  const [isEditModalActive, setIsEditModalActive] = useState(false);
+  const [isShownImageUpload, setIsShownImageUpload] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File>();
+  const [updateUserImage] = useUpdateUserImageByIdMutation();
+
+  const handleImageSelect = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+    const file = event.target.files[0];
+
+    setSelectedImage(file);
+  };
+
+  const handleImageUpload = () => {
+    if (!selectedImage) return;
+
+    const formData = new FormData();
+    formData.append('avatar', selectedImage);
+
+    updateUserImage({
+      args: userInfo?._id,
+      fileData: formData,
+    })
+      .unwrap()
+      .then(() => {
+        toast.success('Your image for this post successfully uploaded!');
+        setIsShownImageUpload(false);
+      })
+      .catch((error) =>
+        toast.error(error.data.error && error.data.error.message),
+      );
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
@@ -25,6 +63,11 @@ const ProfileCard = ({ userInfo }: IProfileCard) => {
       }}
       className="bg-secondary-dark-blue p-4 rounded-xl"
     >
+      <EditProfileModal
+        isModalActive={isEditModalActive}
+        setIsModalActive={setIsEditModalActive}
+        user={userInfo}
+      />
       {userInfo?.avatar && (
         <img
           src={`${additionalUrl}${userInfo?.avatar}`}
@@ -46,6 +89,17 @@ const ProfileCard = ({ userInfo }: IProfileCard) => {
         text={userInfo?.extra_details as string}
       />
       <PostText title="Profession" text={userInfo?.profession as string} />
+      <div className="flex items-center justify-center mt-2">
+        <PropertyIcons
+          setIsImageUploadShow={setIsShownImageUpload}
+          setIsEditModalActive={setIsEditModalActive}
+        />
+      </div>
+      <ImageUpload
+        isShownImageUpload={isShownImageUpload}
+        handleImageUpload={handleImageUpload}
+        handleImageSelect={handleImageSelect}
+      />
     </motion.div>
   );
 };

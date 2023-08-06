@@ -16,6 +16,7 @@ export const api = createApi({
       return headers;
     },
   }),
+  tagTypes: ['Users'],
   endpoints: (builder) => ({
     login: builder.mutation<AuthTokenResponse_T, LoginUser_T>({
       query: (arg) => ({
@@ -29,6 +30,7 @@ export const api = createApi({
         url: '/auth/user',
         method: 'GET',
       }),
+      providesTags: ['Users'],
     }),
   }),
 });

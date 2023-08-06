@@ -9,14 +9,14 @@ export type LoginUser_T = {
 
 export type User_T = {
   _id: string;
-  email?: string | null;
-  name?: string | null;
-  avatar?: string | null;
-  extra_details?: string | null;
-  skills?: string | null;
-  profession?: string | null;
-  details?: string | null;
-  dateCreated?: string | null;
+  email?: string;
+  name?: string;
+  avatar?: string;
+  extra_details?: string;
+  skills?: string;
+  profession?: string;
+  details?: string;
+  dateCreated?: string;
 };
 
 export type UserQuery_T = {
