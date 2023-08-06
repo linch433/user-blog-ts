@@ -41,7 +41,6 @@ export const commentsApi = commentsApiWithTags.injectEndpoints({
       }),
       invalidatesTags: ['Comments'],
     }),
-
   }),
 });
 
