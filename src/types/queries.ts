@@ -5,7 +5,7 @@ export type NewCommentArgs_T = {
   body: NewComment_T;
 };
 
-type EditPost_T = {
+export type NewPost_T = {
   title: string;
   fullText: string;
   description?: string;
@@ -13,7 +13,7 @@ type EditPost_T = {
 
 export type EditPostArgs_T = {
   args: string | undefined;
-  body: EditPost_T;
+  body: NewPost_T;
 };
 
 export type UploadImageArgs_T = {

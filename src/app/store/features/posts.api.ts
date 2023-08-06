@@ -1,6 +1,10 @@
 import { api } from '@/app/store/features/api.ts';
 import { Post_T, PostQuery_T } from '@/types/models.ts';
-import { EditPostArgs_T, UploadImageArgs_T } from '@/types/queries.ts';
+import {
+  EditPostArgs_T,
+  NewPost_T,
+  UploadImageArgs_T,
+} from '@/types/queries.ts';
 
 const postsApiWithTag = api.enhanceEndpoints({ addTagTypes: ['Posts'] });
 
@@ -21,6 +25,14 @@ export const postsApi = postsApiWithTag.injectEndpoints({
         url: `/posts/${args}`,
       }),
       providesTags: ['Posts'],
+    }),
+    createPost: builder.mutation<Post_T, NewPost_T>({
+      query: (body) => ({
+        url: `/posts`,
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: ['Posts'],
     }),
     updatePostWithId: builder.mutation<Post_T, EditPostArgs_T>({
       query: ({ args, body }) => ({
@@ -50,6 +62,7 @@ export const postsApi = postsApiWithTag.injectEndpoints({
 
 export const {
   useGetPostsQuery,
+  useCreatePostMutation,
   useSetLikeForPostByIdMutation,
   useGetPostByIdQuery,
   useUpdatePostWithIdMutation,

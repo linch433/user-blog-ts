@@ -23,7 +23,6 @@ const EditProfileModal = ({
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting },
   } = useForm<UserCreditionals>({
     resolver: zodResolver(UserValidator),

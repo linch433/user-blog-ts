@@ -17,13 +17,13 @@ const Input: React.FC<ITextInput> = ({
   register,
 }) => {
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       <input
         {...register(name)}
         type={type}
         placeholder={placeholder}
         className={clsx(
-          'w-full py-2 px-4',
+          'w-[90%] md:w-[calc(100vh-30rem)] py-2 px-4',
           'border-2 border-secondary-light-blue rounded',
           'appearance-none text-main-smoky-black leading-tight placeholder-secondary-light-blue',
           'focus:outline-none',

@@ -5,6 +5,7 @@ import PostCard from '@/components/ui/Post/PostCard.tsx';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
+import NewPostView from '@/components/ui/Post/NewPostView.tsx';
 
 const PostsPage = () => {
   const [countItem, setCountItem] = useState(20);
@@ -22,6 +23,7 @@ const PostsPage = () => {
 
   return (
     <>
+      <NewPostView />
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
