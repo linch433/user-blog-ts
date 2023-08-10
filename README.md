@@ -1,4 +1,4 @@
-# Kino-Expert Web Application
+# User-Blog Web Application
 
 User-Blog is a dynamic web application built with React, Tailwind CSS, TypeScript, and Vite. This platform empowers users to explore, create, and interact with blog posts, fostering meaningful discussions and interactions within the community.
 
