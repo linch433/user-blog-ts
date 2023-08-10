@@ -9,5 +9,3 @@ export const UserValidator = z.object({
 });
 
 export type UserCreditionals = z.infer<typeof UserValidator>;
-
-export type PartialUserCreditionals = Partial<UserCreditionals>;

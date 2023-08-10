@@ -1,21 +1,44 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  createApi,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
 import { RootState } from '@/app/store/store.ts';
 import { AuthTokenResponse_T, LoginUser_T, User_T } from '@/types/models.ts';
+import { baseUrl } from '@/app/baseUrl';
+import { clearToken } from '../slices/counterSlice';
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: baseUrl,
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).auth.token;
+
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+
+    return headers;
+  },
+});
+
+const baseQueryWithHandler: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+  const result = await baseQuery(args, api, extraOptions);
+  if (result.error && result.error.status === 403) {
+    localStorage.removeItem('AUTH_TOKEN');
+    api.dispatch(clearToken);
+  }
+  return result;
+};
 
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'http://test-blog-api.ficuslife.com/api/v1',
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
-
-      return headers;
-    },
-  }),
+  baseQuery: baseQueryWithHandler,
   tagTypes: ['Users'],
   endpoints: (builder) => ({
     login: builder.mutation<AuthTokenResponse_T, LoginUser_T>({
