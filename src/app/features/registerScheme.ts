@@ -19,14 +19,4 @@ export const RegisterValidator = z.object({
   details: z.string(),
 });
 
-export const defaultRegisterValues: NewUser_T = {
-  details: '',
-  email: '',
-  extra_details: '',
-  name: '',
-  skills: '',
-  password: '',
-  profession: '',
-};
-
 export type RegisterCredentials = z.infer<typeof RegisterValidator>;

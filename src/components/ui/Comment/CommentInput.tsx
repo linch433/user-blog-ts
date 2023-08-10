@@ -34,7 +34,7 @@ const CommentInput = ({ postId }: ICommentInput) => {
   };
 
   useEffect(() => {
-    reset({ text: '' });
+    reset();
   }, [isSubmitSuccessful]);
 
   return (

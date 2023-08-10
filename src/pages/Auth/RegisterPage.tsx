@@ -1,7 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  defaultRegisterValues,
   RegisterCredentials,
   RegisterValidator,
 } from '@/app/features/registerScheme.ts';
@@ -17,7 +16,7 @@ const RegisterPage = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm<RegisterCredentials>({
     resolver: zodResolver(RegisterValidator),
   });
@@ -26,11 +25,7 @@ const RegisterPage = () => {
       .unwrap()
       .then(() => {
         toast.success("You're successfully registered! Try to LogIn");
-
-        // TODO: Make to reset form after submit properly
-        if (isSubmitSuccessful) {
-          reset(defaultRegisterValues);
-        }
+        reset();
       })
       .catch((error) => toast.error(error.data.error));
   };
