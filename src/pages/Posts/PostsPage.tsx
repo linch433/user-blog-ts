@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGetPostsQuery } from '@/app/store/features/posts.api.ts';
-import { PostQuery_T } from '@/types/models.ts';
+import { IPostQuery } from '@/types/models.ts';
 import PostCard from '@/components/ui/Post/PostCard.tsx';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
@@ -9,7 +9,7 @@ import NewPostView from '@/components/ui/Post/NewPostView.tsx';
 
 const PostsPage = () => {
   const [countItem, setCountItem] = useState(20);
-  const params: PostQuery_T = {
+  const params: IPostQuery = {
     limit: countItem,
   };
   const { data: posts, isLoading, isError } = useGetPostsQuery(params);

@@ -1,13 +1,9 @@
-export type AuthTokenResponse_T = {
-  token: string;
-};
-
-export type LoginUser_T = {
+export interface ILoginUser {
   email: string;
   password: string;
-};
+}
 
-export type User_T = {
+export interface IUser {
   _id: string;
   email?: string;
   name?: string;
@@ -17,14 +13,14 @@ export type User_T = {
   profession?: string;
   details?: string;
   dateCreated?: string;
-};
+}
 
-export type UserQuery_T = {
+export interface IGeneralQuery {
   limit?: number;
   skip?: number;
-};
+}
 
-export type Post_T = {
+export interface IPost {
   _id: string;
   title?: string;
   fullText?: string;
@@ -33,20 +29,14 @@ export type Post_T = {
   image?: string;
   likes?: string[];
   postedBy: string;
-};
+}
 
-export type PostQuery_T = {
+export interface IPostQuery extends IGeneralQuery {
   search?: string;
   postedBy?: string;
-  limit?: number;
-  skip?: number;
-};
+}
 
-export type PostInfoLocationState_T = {
-  username: string;
-};
-
-export type NewUser_T = {
+export interface INewUser {
   email: string;
   password: string;
   name: string;
@@ -54,9 +44,9 @@ export type NewUser_T = {
   skills: string;
   profession: string;
   details: string;
-};
+}
 
-export type Comments_T = {
+export interface IComments {
   _id: string;
   commentedBy: string;
   followedCommentID?: string | null;
@@ -64,10 +54,10 @@ export type Comments_T = {
   text: string;
   dateCreated: string;
   likes: string[];
-  followedCommentList?: Comments_T[];
-};
+  followedCommentList?: IComments[];
+}
 
-export type NewComment_T = {
+export interface INewComment {
   text: string;
   followedCommentID?: string;
-};
+}

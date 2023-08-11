@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGetUsersQuery } from '@/app/store/features/users.api.ts';
-import { UserQuery_T } from '@/types/models.ts';
+import { IGeneralQuery } from '@/types/models.ts';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
 import UserCard from '@/components/ui/User/UserCard.tsx';
@@ -8,7 +8,7 @@ import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
 
 const UsersPage = () => {
   const [countItems, setCountItems] = useState(20);
-  const params: UserQuery_T = {
+  const params: IGeneralQuery = {
     limit: countItems,
   };
 

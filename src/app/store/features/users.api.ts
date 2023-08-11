@@ -1,29 +1,29 @@
 import { api } from '@/app/store/features/api.ts';
-import { NewUser_T, User_T, UserQuery_T } from '@/types/models.ts';
-import { UpdateUserArgs_T, UploadImageArgs_T } from '@/types/queries.ts';
+import { INewUser, IUser, IGeneralQuery } from '@/types/models.ts';
+import { IUpdateUserArgs, IUploadImageArgs } from '@/types/queries.ts';
 
 const usersApiWithTag = api.enhanceEndpoints({ addTagTypes: ['Users'] });
 
 export const usersApi = usersApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
-    getUsers: builder.query<User_T[], UserQuery_T>({
+    getUsers: builder.query<IUser[], IGeneralQuery>({
       query: (args) => ({
         url: `/users`,
         params: { ...args },
       }),
-      transformResponse: (rawResult: { data: User_T[] }) => {
+      transformResponse: (rawResult: { data: IUser[] }) => {
         return rawResult.data;
       },
       providesTags: ['Users'],
     }),
-    createUser: builder.mutation<User_T, Partial<NewUser_T>>({
+    createUser: builder.mutation<IUser, Partial<INewUser>>({
       query: (args) => ({
         url: '/users',
         method: 'POST',
         body: args,
       }),
     }),
-    updateUserById: builder.mutation<User_T, UpdateUserArgs_T>({
+    updateUserById: builder.mutation<IUser, IUpdateUserArgs>({
       query: ({ args, body }) => ({
         url: `/users/${args}`,
         method: 'PATCH',
@@ -31,7 +31,7 @@ export const usersApi = usersApiWithTag.injectEndpoints({
       }),
       invalidatesTags: ['Users'],
     }),
-    updateUserImageById: builder.mutation<User_T, UploadImageArgs_T>({
+    updateUserImageById: builder.mutation<IUser, IUploadImageArgs>({
       query: ({ args, fileData }) => ({
         url: `/users/upload/${args}`,
         method: 'PUT',
@@ -39,7 +39,7 @@ export const usersApi = usersApiWithTag.injectEndpoints({
       }),
       invalidatesTags: ['Users'],
     }),
-    getUserById: builder.query<User_T, string>({
+    getUserById: builder.query<IUser, string>({
       query: (args) => ({
         url: `/users/${args}`,
       }),

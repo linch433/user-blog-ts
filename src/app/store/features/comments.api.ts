@@ -1,12 +1,12 @@
 import { api } from '@/app/store/features/api.ts';
-import { Comments_T } from '@/types/models.ts';
-import { NewCommentArgs_T } from '@/types/queries.ts';
+import { IComments } from '@/types/models.ts';
+import { INewCommentArgs } from '@/types/queries.ts';
 
 const commentsApiWithTags = api.enhanceEndpoints({ addTagTypes: ['Comments'] });
 
 export const commentsApi = commentsApiWithTags.injectEndpoints({
   endpoints: (builder) => ({
-    getComments: builder.query<Comments_T[], string>({
+    getComments: builder.query<IComments[], string>({
       query: (args) => ({
         url: `/comments/post/${args}`,
       }),
@@ -20,8 +20,8 @@ export const commentsApi = commentsApiWithTags.injectEndpoints({
       invalidatesTags: ['Comments'],
     }),
     createNewComment: builder.mutation<
-      Omit<Comments_T, 'followedCommentList'>,
-      NewCommentArgs_T
+      Omit<IComments, 'followedCommentList'>,
+      INewCommentArgs
     >({
       query: ({ args, body }) => ({
         url: `/comments/post/${args}`,
@@ -31,8 +31,8 @@ export const commentsApi = commentsApiWithTags.injectEndpoints({
       invalidatesTags: ['Comments'],
     }),
     updateUserComment: builder.mutation<
-      Omit<Comments_T, 'followedCommentList'>,
-      NewCommentArgs_T
+      Omit<IComments, 'followedCommentList'>,
+      INewCommentArgs
     >({
       query: ({ args, body }) => ({
         url: `/comments/${args}`,
@@ -49,5 +49,4 @@ export const {
   useSetLikeOnCommentMutation,
   useCreateNewCommentMutation,
   useUpdateUserCommentMutation,
-
 } = commentsApi;

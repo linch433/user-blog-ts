@@ -1,9 +1,9 @@
 import { additionalUrl } from '@/app/baseUrl.ts';
 import { getFormatDate } from '@/utils/services/DateFormat.ts';
-import { User_T } from '@/types/models.ts';
+import { IUser } from '@/types/models.ts';
 
 interface IUserCard {
-  user: User_T;
+  user: IUser;
 }
 
 const UserCard = ({ user }: IUserCard) => {

@@ -6,7 +6,7 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@/app/store/store.ts';
-import { AuthTokenResponse_T, LoginUser_T, User_T } from '@/types/models.ts';
+import { ILoginUser, User_T } from '@/types/models.ts';
 import { baseUrl } from '@/app/baseUrl';
 import { clearToken } from '../slices/counterSlice';
 
@@ -41,7 +41,7 @@ export const api = createApi({
   baseQuery: baseQueryWithHandler,
   tagTypes: ['Users'],
   endpoints: (builder) => ({
-    login: builder.mutation<AuthTokenResponse_T, LoginUser_T>({
+    login: builder.mutation<{ token: string }, ILoginUser>({
       query: (arg) => ({
         url: '/auth',
         method: 'POST',

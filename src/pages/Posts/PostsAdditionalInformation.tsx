@@ -10,7 +10,7 @@ import CommentInput from '@/components/ui/Comment/CommentInput.tsx';
 
 const PostsAdditionalInformation = () => {
   const params = useParams();
-  const location: PostInfoLocationState_T = useLocation().state;
+  const location: { username: string } = useLocation().state;
   const username = location.username;
   let commentsArray: Comments_T[] = [];
 

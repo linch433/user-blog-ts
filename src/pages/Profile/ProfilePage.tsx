@@ -2,13 +2,13 @@ import { useUserInfoQuery } from '@/app/store/features/api.ts';
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
 import { motion } from 'framer-motion';
 import { useGetPostsQuery } from '@/app/store/features/posts.api.ts';
-import { PostQuery_T } from '@/types/models.ts';
+import { IPostQuery } from '@/types/models.ts';
 import PostCard from '@/components/ui/Post/PostCard.tsx';
 import ProfileCard from '@/components/ui/Profile/ProfileCard.tsx';
 
 const ProfilePage = () => {
   const { data: userInfo, isLoading, isError } = useUserInfoQuery();
-  const postsParams: PostQuery_T = {
+  const postsParams: IPostQuery = {
     postedBy: userInfo?._id,
   };
   const { data: posts } = useGetPostsQuery(postsParams);

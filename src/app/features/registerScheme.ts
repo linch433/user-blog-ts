@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { NewUser_T } from '@/types/models.ts';
 
 export const RegisterValidator = z.object({
   email: z

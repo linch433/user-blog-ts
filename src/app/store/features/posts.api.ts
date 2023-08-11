@@ -1,32 +1,28 @@
 import { api } from '@/app/store/features/api.ts';
-import { Post_T, PostQuery_T } from '@/types/models.ts';
-import {
-  EditPostArgs_T,
-  NewPost_T,
-  UploadImageArgs_T,
-} from '@/types/queries.ts';
+import { IPost, IPostQuery } from '@/types/models.ts';
+import { IEditPostArgs, INewPost, IUploadImageArgs } from '@/types/queries.ts';
 
 const postsApiWithTag = api.enhanceEndpoints({ addTagTypes: ['Posts'] });
 
 export const postsApi = postsApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
-    getPosts: builder.query<Post_T[], PostQuery_T>({
+    getPosts: builder.query<IPost[], IPostQuery>({
       query: (args) => ({
         url: `/posts`,
         params: { ...args },
       }),
-      transformResponse: (rawResult: { data: Post_T[] }) => {
+      transformResponse: (rawResult: { data: IPost[] }) => {
         return rawResult.data;
       },
       providesTags: ['Posts'],
     }),
-    getPostById: builder.query<Post_T, string>({
+    getPostById: builder.query<IPost, string>({
       query: (args) => ({
         url: `/posts/${args}`,
       }),
       providesTags: ['Posts'],
     }),
-    createPost: builder.mutation<Post_T, NewPost_T>({
+    createPost: builder.mutation<IPost, INewPost>({
       query: (body) => ({
         url: `/posts`,
         method: 'POST',
@@ -34,7 +30,7 @@ export const postsApi = postsApiWithTag.injectEndpoints({
       }),
       invalidatesTags: ['Posts'],
     }),
-    updatePostWithId: builder.mutation<Post_T, EditPostArgs_T>({
+    updatePostWithId: builder.mutation<IPost, IEditPostArgs>({
       query: ({ args, body }) => ({
         url: `/posts/${args}`,
         method: 'PATCH',
@@ -42,7 +38,7 @@ export const postsApi = postsApiWithTag.injectEndpoints({
       }),
       invalidatesTags: ['Posts'],
     }),
-    updatePostImageWithId: builder.mutation<Post_T, UploadImageArgs_T>({
+    updatePostImageWithId: builder.mutation<IPost, IUploadImageArgs>({
       query: ({ args, fileData }) => ({
         url: `/posts/upload/${args}`,
         method: 'PUT',

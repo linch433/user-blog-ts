@@ -1,10 +1,10 @@
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
 import Comment from '@/components/ui/Comment/Comment.tsx';
-import { Comments_T } from '@/types/models.ts';
+import { IComments } from '@/types/models.ts';
 
 interface ICommentsSection {
   isLoadingComments: boolean;
-  commentsArray: Comments_T[];
+  commentsArray: IComments[];
 }
 
 const CommentsSection = ({

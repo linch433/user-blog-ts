@@ -1,27 +1,27 @@
-import { NewComment_T, User_T } from '@/types/models.ts';
+import { INewComment, IUser } from '@/types/models.ts';
 
-export type NewCommentArgs_T = {
+export interface INewCommentArgs {
   args: string | undefined;
-  body: NewComment_T;
-};
+  body: INewComment;
+}
 
-export type NewPost_T = {
+export interface INewPost {
   title: string;
   fullText: string;
   description?: string;
-};
+}
 
-export type EditPostArgs_T = {
+export interface IEditPostArgs {
   args: string | undefined;
-  body: NewPost_T;
-};
+  body: INewPost;
+}
 
-export type UploadImageArgs_T = {
+export interface IUploadImageArgs {
   args: string | undefined;
   fileData: FormData;
-};
+}
 
-export type UpdateUserArgs_T = {
+export interface IUpdateUserArgs {
   args: string | undefined;
-  body: Omit<User_T, '_id'>;
-};
+  body: Omit<IUser, '_id'>;
+}

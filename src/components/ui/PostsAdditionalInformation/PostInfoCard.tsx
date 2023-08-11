@@ -1,7 +1,7 @@
 import PostText from '@/components/ui/Post/PostText.tsx';
 import { getFormatDate } from '@/utils/services/DateFormat.ts';
 import { additionalUrl } from '@/app/baseUrl.ts';
-import { Post_T } from '@/types/models.ts';
+import { IPost } from '@/types/models.ts';
 import { useUserInfoQuery } from '@/app/store/features/api.ts';
 import { ChangeEvent, useState } from 'react';
 import EditPostModal from '@/components/ui/PostsAdditionalInformation/EditPostModal.tsx';
@@ -11,7 +11,7 @@ import { useUpdatePostImageWithIdMutation } from '@/app/store/features/posts.api
 import toast from 'react-hot-toast';
 
 interface IPostInfoCard {
-  postDetails: Post_T | undefined;
+  postDetails: IPost | undefined;
   username: string;
 }
 

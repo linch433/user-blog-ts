@@ -1,6 +1,6 @@
-import { Comments_T } from '@/types/models.ts';
+import { IComments } from '@/types/models.ts';
 
-export const handleFollowedComment = (comments: Comments_T[]) => {
+export const handleFollowedComment = (comments: IComments[]) => {
   const commentList = [];
   for (let i = 0; i < comments.length; i++) {
     const followedCommentList = [];
