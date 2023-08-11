@@ -1,4 +1,4 @@
-import { User_T } from '@/types/models.ts';
+import { IUser } from '@/types/models.ts';
 import { additionalUrl } from '@/app/baseUrl.ts';
 import PostText from '@/components/ui/Post/PostText.tsx';
 import { getFormatDate } from '@/utils/services/DateFormat.ts';
@@ -11,7 +11,7 @@ import { useUpdateUserImageByIdMutation } from '@/app/store/features/users.api.t
 import EditProfileModal from '@/components/ui/Profile/EditProfileModal.tsx';
 
 interface IProfileCard {
-  userInfo: User_T | undefined;
+  userInfo: IUser | undefined;
 }
 
 const ProfileCard = ({ userInfo }: IProfileCard) => {

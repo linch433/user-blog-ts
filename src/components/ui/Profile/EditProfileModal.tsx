@@ -3,7 +3,7 @@ import Input from '@/components/ui/Input.tsx';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { UserCreditionals, UserValidator } from '@/app/features/userScheme.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { User_T } from '@/types/models.ts';
+import { IUser } from '@/types/models.ts';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
 import { useUpdateUserByIdMutation } from '@/app/store/features/users.api.ts';
@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 interface IEditProfileModal {
   isModalActive: boolean;
   setIsModalActive: (args: boolean) => void;
-  user: User_T | undefined;
+  user: IUser | undefined;
 }
 
 const EditProfileModal = ({

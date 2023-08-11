@@ -7,7 +7,7 @@ import {
   CommentValidator,
 } from '@/app/features/commentScheme.ts';
 import Input from '@/components/ui/Input.tsx';
-import { Comments_T } from '@/types/models.ts';
+import { IComments } from '@/types/models.ts';
 import { useUpdateUserCommentMutation } from '@/app/store/features/comments.api.ts';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 interface IEditCommentModal {
   isModalActive: boolean;
   setIsModalActive: (arg: boolean) => void;
-  comment: Comments_T;
+  comment: IComments;
 }
 
 const EditCommentModal = ({

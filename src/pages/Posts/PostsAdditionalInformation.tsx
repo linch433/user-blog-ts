@@ -1,7 +1,7 @@
 import { useLocation, useParams } from 'react-router-dom';
 import { useGetPostByIdQuery } from '@/app/store/features/posts.api.ts';
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
-import { Comments_T, PostInfoLocationState_T } from '@/types/models.ts';
+import { IComments } from '@/types/models.ts';
 import { useGetCommentsQuery } from '@/app/store/features/comments.api.ts';
 import { handleFollowedComment } from '@/utils/services/HandleFollowedComment.ts';
 import PostInfoCard from '@/components/ui/PostsAdditionalInformation/PostInfoCard.tsx';
@@ -12,7 +12,7 @@ const PostsAdditionalInformation = () => {
   const params = useParams();
   const location: { username: string } = useLocation().state;
   const username = location.username;
-  let commentsArray: Comments_T[] = [];
+  let commentsArray: IComments[] = [];
 
   const {
     data: postDetails,

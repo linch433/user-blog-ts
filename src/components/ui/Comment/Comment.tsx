@@ -1,4 +1,4 @@
-import { Comments_T } from '@/types/models.ts';
+import { IComments } from '@/types/models.ts';
 import { useGetUserByIdQuery } from '@/app/store/features/users.api.ts';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store.ts';
@@ -18,7 +18,7 @@ import EditCommentModal from '@/components/ui/Comment/EditCommentModal.tsx';
 import AddFollowedCommentModal from '@/components/ui/Comment/AddFollowedCommentModal.tsx';
 
 interface IComment {
-  comment: Comments_T;
+  comment: IComments;
 }
 
 const Comment = ({ comment }: IComment) => {

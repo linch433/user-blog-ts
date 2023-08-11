@@ -1,4 +1,4 @@
-import { Comments_T } from '@/types/models.ts';
+import { IComments } from '@/types/models.ts';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 interface IAddFollowedCommentModal {
   isModalActive: boolean;
   setIsModalActive: (arg: boolean) => void;
-  comment: Comments_T;
+  comment: IComments;
 }
 
 const AddFollowedCommentModal = ({

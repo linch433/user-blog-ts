@@ -7,14 +7,14 @@ import { useSetLikeForPostByIdMutation } from '@/app/store/features/posts.api.ts
 import { RootState } from '@/app/store/store.ts';
 import { getFormatDate } from '@/utils/services/DateFormat.ts';
 import { findLikeOnPostOrComment } from '@/utils/services/FindLike.ts';
-import { Post_T } from '@/types/models.ts';
+import { IPost } from '@/types/models.ts';
 import PostText from '@/components/ui/Post/PostText.tsx';
 import LikeSection from '@/components/ui/LikeSection.tsx';
 import toast from 'react-hot-toast';
 import { clsx } from 'clsx';
 
 interface IPostCard {
-  post: Post_T;
+  post: IPost;
 }
 
 const PostCard = ({ post }: IPostCard) => {

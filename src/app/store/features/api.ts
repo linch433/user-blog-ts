@@ -6,7 +6,7 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@/app/store/store.ts';
-import { ILoginUser, User_T } from '@/types/models.ts';
+import { ILoginUser, IUser } from '@/types/models.ts';
 import { baseUrl } from '@/app/baseUrl';
 import { clearToken } from '../slices/counterSlice';
 
@@ -48,7 +48,7 @@ export const api = createApi({
         body: arg,
       }),
     }),
-    userInfo: builder.query<User_T, void>({
+    userInfo: builder.query<IUser, void>({
       query: () => ({
         url: '/auth/user',
         method: 'GET',

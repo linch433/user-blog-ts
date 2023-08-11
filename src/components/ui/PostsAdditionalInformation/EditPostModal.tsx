@@ -5,14 +5,14 @@ import { PostCreditionals, PostValidator } from '@/app/features/postScheme.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
-import { Post_T } from '@/types/models.ts';
+import { IPost } from '@/types/models.ts';
 import { useUpdatePostWithIdMutation } from '@/app/store/features/posts.api.ts';
 import toast from 'react-hot-toast';
 
 interface IEditPostModal {
   isModalActive: boolean;
   setIsModalActive: (args: boolean) => void;
-  post: Post_T | undefined;
+  post: IPost | undefined;
 }
 
 const EditPostModal = ({
