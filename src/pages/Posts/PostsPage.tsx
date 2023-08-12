@@ -1,22 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useGetPostsQuery } from '@/components/Post/api/posts.api.ts';
 import { IPostQuery } from '@/components/Post/types/posts.ts';
 import PostCard from '@/components/Post/ui/PostCard.tsx';
-import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
-import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
+import Loader, { PageLoader } from '@/components/ui/Loader/Loader.tsx';
 import NewPostView from '@/components/Post/ui/NewPostView.tsx';
 
 const PostsPage = () => {
-  const [countItem, setCountItem] = useState(20);
+  const [page, setPage] = useState(1);
   const params: IPostQuery = {
-    limit: countItem,
+    limit: page * 20,
   };
-  const { data: posts, isLoading, isError } = useGetPostsQuery(params);
+  const {
+    data: posts,
+    isLoading,
+    isError,
+    isFetching,
+  } = useGetPostsQuery(params);
 
-  const handleCountItemUpdate = () => {
-    setCountItem((prev) => prev + 20);
-  };
+  useEffect(() => {
+    const onScroll = () => {
+      const scrolledToBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight;
+
+      if (scrolledToBottom && !isFetching) {
+        setPage((prev) => prev + 1);
+      }
+    };
+
+    document.addEventListener('scroll', onScroll);
+
+    return function () {
+      document.removeEventListener('scroll', onScroll);
+    };
+  }, [page, isFetching]);
 
   if (isLoading) return <PageLoader />;
   if (isError) return <div>Something went wrong</div>;
@@ -33,17 +50,7 @@ const PostsPage = () => {
         {posts?.map((post) => <PostCard key={post._id} post={post} />)}
       </motion.div>
       <div className="flex items-center justify-center my-4">
-        <button
-          onClick={handleCountItemUpdate}
-          className={clsx(
-            'bg-main-light-blue',
-            'cursor-pointer',
-            'px-2 py-1 rounded-lg',
-            'hover:bg-secondary-dark-blue hover:border',
-          )}
-        >
-          Next
-        </button>
+        {isFetching && <Loader />}
       </div>
     </>
   );
