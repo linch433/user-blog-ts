@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   RegisterCredentials,
   RegisterValidator,
-} from '@/app/features/registerScheme.ts';
+} from '@/app/validators/registerScheme.ts';
 import Input from '@/components/ui/Input.tsx';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';

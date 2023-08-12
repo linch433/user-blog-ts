@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import {
   LoginCredentials,
   LoginValidator,
-} from '@/app/features/loginScheme.ts';
+} from '@/app/validators/loginScheme.ts';
 import Input from '@/components/ui/Input.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';

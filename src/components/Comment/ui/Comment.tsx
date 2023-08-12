@@ -1,21 +1,21 @@
-import { IComments } from '@/types/models.ts';
+import { IComments } from '@/components/Comment/types/comments.ts';
 import { useGetUserByIdQuery } from '@/app/store/features/users.api.ts';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store.ts';
-import { findLikeOnPostOrComment } from '@/utils/services/FindLike.ts';
-import { useUserInfoQuery } from '@/app/store/features/api.ts';
+import { findLikeOnPostOrComment } from '@/utils/helpers/FindLike.ts';
+import { useUserInfoQuery } from '@/components/Profile/api/profile.api.ts';
 import LikeSection from '@/components/ui/LikeSection.tsx';
-import { getFormatDate } from '@/utils/services/DateFormat.ts';
-import { useSetLikeOnCommentMutation } from '@/app/store/features/comments.api.ts';
+import { getFormatDate } from '@/utils/helpers/DateFormat.ts';
+import { useSetLikeOnCommentMutation } from '@/components/Comment/api/comments.api.ts';
 import toast from 'react-hot-toast';
-import FollowedComment from '@/components/ui/Comment/FollowedComment.tsx';
+import FollowedComment from '@/components/Comment/ui/FollowedComment.tsx';
 import { clsx } from 'clsx';
 import { BsFillReplyFill } from 'react-icons/bs';
 import { BiSolidEdit } from 'react-icons/bi';
 import HoverContainer from '@/components/ui/HoverContainer.tsx';
 import { useState } from 'react';
-import EditCommentModal from '@/components/ui/Comment/EditCommentModal.tsx';
-import AddFollowedCommentModal from '@/components/ui/Comment/AddFollowedCommentModal.tsx';
+import EditCommentModal from '@/components/Comment/ui/EditCommentModal.tsx';
+import AddFollowedCommentModal from '@/components/Comment/ui/AddFollowedCommentModal.tsx';
 
 interface IComment {
   comment: IComments;

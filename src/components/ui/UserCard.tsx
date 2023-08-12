@@ -1,5 +1,5 @@
 import { additionalUrl } from '@/app/baseUrl.ts';
-import { getFormatDate } from '@/utils/services/DateFormat.ts';
+import { getFormatDate } from '@/utils/helpers/DateFormat.ts';
 import { IUser } from '@/types/models.ts';
 
 interface IUserCard {

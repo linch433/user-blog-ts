@@ -1,6 +1,6 @@
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
-import Comment from '@/components/ui/Comment/Comment.tsx';
-import { IComments } from '@/types/models.ts';
+import Comment from '@/components/Comment/ui/Comment.tsx';
+import { IComments } from '@/components/Comment/types/comments.ts';
 
 interface ICommentsSection {
   isLoadingComments: boolean;

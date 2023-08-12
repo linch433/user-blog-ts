@@ -1,11 +1,11 @@
-import { IComments } from '@/types/models.ts';
+import { IComments } from '@/components/Comment/types/comments.ts';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   CommentCredentials,
   CommentValidator,
-} from '@/app/features/commentScheme.ts';
-import { useCreateNewCommentMutation } from '@/app/store/features/comments.api.ts';
+} from '@/components/Comment/validators/commentScheme.ts';
+import { useCreateNewCommentMutation } from '@/components/Comment/api/comments.api.ts';
 import ModalWindow from '@/components/ui/ModalWindow/ModalWindow.tsx';
 import { clsx } from 'clsx';
 import Input from '@/components/ui/Input.tsx';

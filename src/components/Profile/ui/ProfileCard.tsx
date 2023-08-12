@@ -1,14 +1,14 @@
 import { IUser } from '@/types/models.ts';
 import { additionalUrl } from '@/app/baseUrl.ts';
-import PostText from '@/components/ui/Post/PostText.tsx';
-import { getFormatDate } from '@/utils/services/DateFormat.ts';
+import PostText from '@/components/Post/ui/PostText.tsx';
+import { getFormatDate } from '@/utils/helpers/DateFormat.ts';
 import { motion } from 'framer-motion';
-import PropertyIcons from '@/components/ui/PostsAdditionalInformation/PropertyIcons.tsx';
+import PropertyIcons from '@/components/PostsAdditionalInformation/PropertyIcons.tsx';
 import { ChangeEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import ImageUpload from '@/components/ui/ImageUpload.tsx';
 import { useUpdateUserImageByIdMutation } from '@/app/store/features/users.api.ts';
-import EditProfileModal from '@/components/ui/Profile/EditProfileModal.tsx';
+import EditProfileModal from '@/components/Profile/ui/EditProfileModal.tsx';
 
 interface IProfileCard {
   userInfo: IUser | undefined;

@@ -1,4 +1,4 @@
-import { IComments } from '@/types/models.ts';
+import { IComments } from '@/components/Comment/types/comments.ts';
 
 export const handleFollowedComment = (comments: IComments[]) => {
   const commentList = [];

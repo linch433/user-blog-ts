@@ -1,18 +1,21 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { PostCreditionals, PostValidator } from '@/app/features/postScheme.ts';
+import {
+  PostCreditionals,
+  PostValidator,
+} from '@/components/Post/validators/postScheme.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@/components/ui/Input.tsx';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
-import { useCreatePostMutation } from '@/app/store/features/posts.api.ts';
+import { useCreatePostMutation } from '@/components/Post/api/posts.api.ts';
 
 const NewPostView = () => {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitted },
   } = useForm<PostCreditionals>({
     resolver: zodResolver(PostValidator),
   });
@@ -60,7 +63,7 @@ const NewPostView = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitted}
           className={clsx(
             'bg-main-light-blue',
             'cursor-pointer',

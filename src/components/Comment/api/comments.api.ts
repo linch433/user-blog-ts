@@ -1,6 +1,6 @@
 import { api } from '@/app/store/features/api.ts';
-import { IComments } from '@/types/models.ts';
-import { INewCommentArgs } from '@/types/queries.ts';
+import { IComments } from '@/components/Comment/types/comments.ts';
+import { IQueriesArgs } from '@/types/queries.ts';
 
 const commentsApiWithTags = api.enhanceEndpoints({ addTagTypes: ['Comments'] });
 
@@ -21,7 +21,7 @@ export const commentsApi = commentsApiWithTags.injectEndpoints({
     }),
     createNewComment: builder.mutation<
       Omit<IComments, 'followedCommentList'>,
-      INewCommentArgs
+      IQueriesArgs
     >({
       query: ({ args, body }) => ({
         url: `/comments/post/${args}`,
@@ -32,7 +32,7 @@ export const commentsApi = commentsApiWithTags.injectEndpoints({
     }),
     updateUserComment: builder.mutation<
       Omit<IComments, 'followedCommentList'>,
-      INewCommentArgs
+      IQueriesArgs
     >({
       query: ({ args, body }) => ({
         url: `/comments/${args}`,

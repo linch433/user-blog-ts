@@ -1,6 +1,6 @@
 import { api } from '@/app/store/features/api.ts';
 import { INewUser, IUser, IGeneralQuery } from '@/types/models.ts';
-import { IUpdateUserArgs, IUploadImageArgs } from '@/types/queries.ts';
+import { IQueriesArgs, IUploadImageArgs } from '@/types/queries.ts';
 
 const usersApiWithTag = api.enhanceEndpoints({ addTagTypes: ['Users'] });
 
@@ -23,7 +23,7 @@ export const usersApi = usersApiWithTag.injectEndpoints({
         body: args,
       }),
     }),
-    updateUserById: builder.mutation<IUser, IUpdateUserArgs>({
+    updateUserById: builder.mutation<IUser, IQueriesArgs>({
       query: ({ args, body }) => ({
         url: `/users/${args}`,
         method: 'PATCH',

@@ -1,10 +1,10 @@
-import { useUserInfoQuery } from '@/app/store/features/api.ts';
+import { useUserInfoQuery } from '@/components/Profile/api/profile.api.ts';
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
 import { motion } from 'framer-motion';
-import { useGetPostsQuery } from '@/app/store/features/posts.api.ts';
-import { IPostQuery } from '@/types/models.ts';
-import PostCard from '@/components/ui/Post/PostCard.tsx';
-import ProfileCard from '@/components/ui/Profile/ProfileCard.tsx';
+import { useGetPostsQuery } from '@/components/Post/api/posts.api.ts';
+import { IPostQuery } from '@/components/Post/types/posts.ts';
+import PostCard from '@/components/Post/ui/PostCard.tsx';
+import ProfileCard from '@/components/Profile/ui/ProfileCard.tsx';
 
 const ProfilePage = () => {
   const { data: userInfo, isLoading, isError } = useUserInfoQuery();

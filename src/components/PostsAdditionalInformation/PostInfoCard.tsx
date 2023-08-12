@@ -1,13 +1,13 @@
-import PostText from '@/components/ui/Post/PostText.tsx';
-import { getFormatDate } from '@/utils/services/DateFormat.ts';
+import PostText from '@/components/Post/ui/PostText.tsx';
+import { getFormatDate } from '@/utils/helpers/DateFormat.ts';
 import { additionalUrl } from '@/app/baseUrl.ts';
-import { IPost } from '@/types/models.ts';
-import { useUserInfoQuery } from '@/app/store/features/api.ts';
+import { IPost } from '@/components/Post/types/posts.ts';
+import { useUserInfoQuery } from '@/components/Profile/api/profile.api.ts';
 import { ChangeEvent, useState } from 'react';
-import EditPostModal from '@/components/ui/PostsAdditionalInformation/EditPostModal.tsx';
-import PropertyIcons from '@/components/ui/PostsAdditionalInformation/PropertyIcons.tsx';
+import EditPostModal from '@/components/PostsAdditionalInformation/EditPostModal.tsx';
+import PropertyIcons from '@/components/PostsAdditionalInformation/PropertyIcons.tsx';
 import ImageUpload from '@/components/ui/ImageUpload.tsx';
-import { useUpdatePostImageWithIdMutation } from '@/app/store/features/posts.api.ts';
+import { useUpdatePostImageWithIdMutation } from '@/components/Post/api/posts.api.ts';
 import toast from 'react-hot-toast';
 
 interface IPostInfoCard {

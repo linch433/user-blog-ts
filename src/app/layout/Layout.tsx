@@ -3,11 +3,11 @@ import Header from '@/app/layout/Header.tsx';
 import { clsx } from 'clsx';
 import Divider from '@/components/ui/Divider.tsx';
 
-type Layout_T = {
+interface ILayout {
   children: ReactNode;
-};
+}
 
-const Layout = ({ children }: Layout_T) => {
+const Layout = ({ children }: ILayout) => {
   return (
     <div className="font-poppins text-highlight bg-main-dark-blue">
       <Header />

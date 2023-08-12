@@ -5,10 +5,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   CommentCredentials,
   CommentValidator,
-} from '@/app/features/commentScheme.ts';
+} from '@/components/Comment/validators/commentScheme.ts';
 import Input from '@/components/ui/Input.tsx';
-import { IComments } from '@/types/models.ts';
-import { useUpdateUserCommentMutation } from '@/app/store/features/comments.api.ts';
+import { IComments } from '@/components/Comment/types/comments.ts';
+import { useUpdateUserCommentMutation } from '@/components/Comment/api/comments.api.ts';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 

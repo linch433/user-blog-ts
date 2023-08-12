@@ -1,16 +1,18 @@
 import { useLocation, useParams } from 'react-router-dom';
-import { useGetPostByIdQuery } from '@/app/store/features/posts.api.ts';
+import { useGetPostByIdQuery } from '@/components/Post/api/posts.api.ts';
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
-import { IComments } from '@/types/models.ts';
-import { useGetCommentsQuery } from '@/app/store/features/comments.api.ts';
-import { handleFollowedComment } from '@/utils/services/HandleFollowedComment.ts';
-import PostInfoCard from '@/components/ui/PostsAdditionalInformation/PostInfoCard.tsx';
-import CommentsSection from '@/components/ui/PostsAdditionalInformation/CommentsSection.tsx';
-import CommentInput from '@/components/ui/Comment/CommentInput.tsx';
+import { IComments } from '@/components/Comment/types/comments.ts';
+import { useGetCommentsQuery } from '@/components/Comment/api/comments.api.ts';
+import { handleFollowedComment } from '@/utils/helpers/HandleFollowedComment';
+import PostInfoCard from '@/components/PostsAdditionalInformation/PostInfoCard.tsx';
+import CommentsSection from '@/components/PostsAdditionalInformation/CommentsSection.tsx';
+import CommentInput from '@/components/Comment/ui/CommentInput.tsx';
 
 const PostsAdditionalInformation = () => {
   const params = useParams();
-  const location: { username: string } = useLocation().state;
+  const location: {
+    username: string;
+  } = useLocation().state;
   const username = location.username;
   let commentsArray: IComments[] = [];
 

@@ -1,5 +1,5 @@
-import { IComments } from '@/types/models.ts';
-import Comment from '@/components/ui/Comment/Comment.tsx';
+import { IComments } from '@/components/Comment/types/comments.ts';
+import Comment from '@/components/Comment/ui/Comment.tsx';
 
 interface IFollowedComment {
   followedComment: IComments;

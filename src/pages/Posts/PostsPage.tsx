@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useGetPostsQuery } from '@/app/store/features/posts.api.ts';
-import { IPostQuery } from '@/types/models.ts';
-import PostCard from '@/components/ui/Post/PostCard.tsx';
+import { useGetPostsQuery } from '@/components/Post/api/posts.api.ts';
+import { IPostQuery } from '@/components/Post/types/posts.ts';
+import PostCard from '@/components/Post/ui/PostCard.tsx';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
-import NewPostView from '@/components/ui/Post/NewPostView.tsx';
+import NewPostView from '@/components/Post/ui/NewPostView.tsx';
 
 const PostsPage = () => {
   const [countItem, setCountItem] = useState(20);

@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { hasMoreThanTwoWords } from '@/utils/services/StringService.ts';
+import { hasMoreThanTwoWords } from '@/utils/helpers/StringService.ts';
 
 interface IPostText {
   title: string;

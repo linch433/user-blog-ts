@@ -3,7 +3,7 @@ import { useGetUsersQuery } from '@/app/store/features/users.api.ts';
 import { IGeneralQuery } from '@/types/models.ts';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
-import UserCard from '@/components/ui/User/UserCard.tsx';
+import UserCard from '@/components/ui/UserCard.tsx';
 import { PageLoader } from '@/components/ui/Loader/Loader.tsx';
 
 const UsersPage = () => {

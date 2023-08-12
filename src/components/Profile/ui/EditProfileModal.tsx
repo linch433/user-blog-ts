@@ -1,7 +1,10 @@
 import ModalWindow from '@/components/ui/ModalWindow/ModalWindow.tsx';
 import Input from '@/components/ui/Input.tsx';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { UserCreditionals, UserValidator } from '@/app/features/userScheme.ts';
+import {
+  UserCreditionals,
+  UserValidator,
+} from '@/components/Profile/validators/userScheme.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IUser } from '@/types/models.ts';
 import { clsx } from 'clsx';
@@ -23,7 +26,7 @@ const EditProfileModal = ({
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitted },
   } = useForm<UserCreditionals>({
     resolver: zodResolver(UserValidator),
     defaultValues: {
@@ -95,7 +98,7 @@ const EditProfileModal = ({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitted}
           className={clsx(
             'bg-main-light-blue',
             'cursor-pointer',

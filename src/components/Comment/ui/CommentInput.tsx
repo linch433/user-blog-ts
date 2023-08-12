@@ -2,12 +2,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import {
   CommentCredentials,
   CommentValidator,
-} from '@/app/features/commentScheme.ts';
+} from '@/components/Comment/validators/commentScheme.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@/components/ui/Input.tsx';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
-import { useCreateNewCommentMutation } from '@/app/store/features/comments.api.ts';
+import { useCreateNewCommentMutation } from '@/components/Comment/api/comments.api.ts';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
 
@@ -20,7 +20,7 @@ const CommentInput = ({ postId }: ICommentInput) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors, isSubmitSuccessful, isSubmitted },
   } = useForm<CommentCredentials>({
     resolver: zodResolver(CommentValidator),
   });
@@ -52,6 +52,7 @@ const CommentInput = ({ postId }: ICommentInput) => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         type="submit"
+        disabled={isSubmitted}
         className={clsx(
           'bg-main-light-blue',
           'cursor-pointer',
