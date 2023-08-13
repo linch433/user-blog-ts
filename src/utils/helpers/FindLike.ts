@@ -4,9 +4,6 @@ export const findLikeOnPostOrComment = (
   likes: string[],
   userInfo: IUser | undefined,
 ) =>
-  likes?.find((id: string) => {
-    if (id === userInfo?._id) {
-      return id;
-    }
-    return undefined;
+  likes?.some((id: string) => {
+    return id === userInfo?._id;
   });

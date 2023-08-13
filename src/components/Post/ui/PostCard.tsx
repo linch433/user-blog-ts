@@ -25,7 +25,10 @@ const PostCard = ({ post }: IPostCard) => {
   const { data: userInfo } = useUserInfoQuery();
   const [setLikeOnPost] = useSetLikeForPostByIdMutation();
 
-  const isLikedPost = findLikeOnPostOrComment(likes as string[], userInfo);
+  const isLikedPost: boolean = findLikeOnPostOrComment(
+    likes as string[],
+    userInfo,
+  );
 
   const handleSetLikeForPost = () => {
     setLikeOnPost(_id)

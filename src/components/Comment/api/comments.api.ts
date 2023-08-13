@@ -17,7 +17,6 @@ export const commentsApi = commentsApiWithTags.injectEndpoints({
         url: `/comments/like/${args}`,
         method: 'PUT',
       }),
-      invalidatesTags: ['Comments'],
     }),
     createNewComment: builder.mutation<
       Omit<IComments, 'followedCommentList'>,

@@ -14,15 +14,6 @@ export const postsApi = postsApiWithTag.injectEndpoints({
       transformResponse: (rawResult: { data: IPost[] }) => {
         return rawResult.data;
       },
-      // serializeQueryArgs: ({ endpointName }) => {
-      //   return endpointName;
-      // },
-      // merge: (currentCache, newItems) => {
-      //   currentCache.push(...newItems);
-      // },
-      // forceRefetch({ currentArg, previousArg }) {
-      //   return currentArg !== previousArg;
-      // },
       providesTags: ['Posts'],
     }),
     getPostById: builder.query<IPost, string>({
@@ -60,7 +51,6 @@ export const postsApi = postsApiWithTag.injectEndpoints({
         url: `/posts/like/${postId}`,
         method: 'PUT',
       }),
-      invalidatesTags: ['Posts'],
     }),
   }),
 });
