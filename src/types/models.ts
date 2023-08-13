@@ -1,3 +1,12 @@
+export interface DataList<T> {
+  pagination: {
+    limit: string;
+    skip: string;
+    total: number;
+  };
+  data: T[];
+}
+
 export interface ILoginUser {
   email: string;
   password: string;

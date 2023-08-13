@@ -1,20 +1,20 @@
 import { api } from '@/app/store/features/api.ts';
-import { INewUser, IUser, IGeneralQuery } from '@/types/models.ts';
+import { INewUser, IUser, IGeneralQuery, DataList } from '@/types/models.ts';
 import { IQueriesArgs, IUploadImageArgs } from '@/types/queries.ts';
 
 const usersApiWithTag = api.enhanceEndpoints({ addTagTypes: ['Users'] });
 
 export const usersApi = usersApiWithTag.injectEndpoints({
   endpoints: (builder) => ({
-    getUsers: builder.query<IUser[], IGeneralQuery>({
+    getUsers: builder.query<DataList<IUser>, IGeneralQuery>({
       query: (args) => ({
         url: `/users`,
         params: { ...args },
       }),
-      transformResponse: (rawResult: { data: IUser[] }) => {
-        return rawResult.data;
-      },
-      providesTags: ['Users'],
+      // transformResponse: (rawResult: { data: IUser[] }) => {
+      //   console.log(rawResult);
+      //   return rawResult.data;
+      // },
     }),
     createUser: builder.mutation<IUser, Partial<INewUser>>({
       query: (args) => ({
